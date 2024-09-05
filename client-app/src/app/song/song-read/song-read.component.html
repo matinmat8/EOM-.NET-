@@ -1,0 +1,15 @@
+<div *ngIf="songs.length > 0">
+    <ul>
+      <li *ngFor="let song of songs">
+        {{ song.musicName }} published by {{ song.userName }}
+      </li>
+      <li *ngFor="let song of songs">
+        <a [routerLink]="['/songs', song.id]">{{ song.musicName }} by {{ song.songSingers }}</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="songs.length === 0">
+    No songs available.
+  </div>
+  
+  

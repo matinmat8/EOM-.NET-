@@ -1,0 +1,11 @@
+<div *ngIf="song">
+    <h2>{{ song.MusicName }}</h2>
+    <p>Artist: {{ song.Genre }}</p>
+    <p>Album: {{ song.Album }}</p>
+    <p>Release Date: {{ song.ReleaseDate }}</p>
+
+
+    <a [routerLink]="['/song/delete', song.id]">{{ song.musicName }} by {{ song.songSingers }}</a>
+
+  </div>
+  
