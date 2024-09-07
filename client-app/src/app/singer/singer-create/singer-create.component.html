@@ -1,0 +1,44 @@
+<form [formGroup]="singerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="Name" required>
+      <div *ngIf="singerForm.get('Name')?.invalid && (singerForm.get('Name')?.dirty || singerForm.get('Name')?.touched)">
+        <small class="error">Name is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="genreId">Genre ID:</label>
+      <input id="genreId" formControlName="GenreId" required>
+      <div *ngIf="singerForm.get('GenreId')?.invalid && (singerForm.get('GenreId')?.dirty || singerForm.get('GenreId')?.touched)">
+        <small class="error">Genre ID is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="albumId">Album ID:</label>
+      <input id="albumId" formControlName="AlbumId" required>
+      <div *ngIf="singerForm.get('AlbumId')?.invalid && (singerForm.get('AlbumId')?.dirty || singerForm.get('AlbumId')?.touched)">
+        <small class="error">Album ID is required.</small>
+      </div>
+    </div>
+  
+  
+    <div>
+      <label for="birth">Birth Date:</label>
+      <input id="birth" type="date" formControlName="Birth">
+    </div>
+  
+    <div>
+      <label for="death">Death Date:</label>
+      <input id="death" type="date" formControlName="Death">
+    </div>
+  
+    <div>
+      <label for="aboutSinger">About Singer:</label>
+      <textarea id="aboutSinger" formControlName="AboutSinger"></textarea>
+    </div>
+  
+    <button type="submit" [disabled]="singerForm.invalid">Add Singer</button>
+  </form>
+  

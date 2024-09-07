@@ -1,0 +1,14 @@
+<div *ngIf="singer">
+    <h2>{{ singer.name }}</h2>
+    <p>about singer: {{ singer.about_singer }}</p>
+    <p>Album: {{ singer.AlbumId }}</p>
+    <p>birth Date: {{ singer.birth }}</p>
+    <p>death Date: {{ singer.death }}</p>
+
+
+    <a [routerLink]="['/singer/delete', singer.id]">Do You Want to Delete {{ singer.name }}</a> <br>
+    <a [routerLink]="['/singer/update', singer.id]">Do You Want to Update The Singer {{ singer.name }}</a>
+
+
+  </div>
+  

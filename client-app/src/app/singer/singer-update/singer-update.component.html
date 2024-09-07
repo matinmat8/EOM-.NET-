@@ -1,0 +1,24 @@
+<div *ngIf="singerForm">
+    <form [formGroup]="singerForm" (ngSubmit)="onSubmit()">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="Name" type="text" />
+  
+      <label for="genre">Genre:</label>
+      <input id="genre" formControlName="GenreId" type="text" />
+  
+      <label for="album">Album:</label>
+      <input id="album" formControlName="AlbumId" type="text" />
+  
+      <label for="birth">Birth:</label>
+      <input id="birth" formControlName="Birth" type="date" />
+  
+      <label for="death">Death:</label>
+      <input id="death" formControlName="Death" type="date" />
+  
+      <label for="about">About:</label>
+      <textarea id="about" formControlName="AboutSinger"></textarea>
+  
+      <button type="submit">Update Singer</button>
+    </form>
+  </div>
+  

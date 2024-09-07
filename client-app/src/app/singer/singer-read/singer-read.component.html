@@ -1,0 +1,12 @@
+<div *ngIf="singers.length > 0">
+    <ul>
+      <li *ngFor="let singer of singers">
+        <a [routerLink]="['/singer', singer.id]">{{ singer.name }} detail page</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="singers.length === 0">
+    No singers available.
+  </div>
+  
+  
