@@ -1,7 +1,8 @@
 
 using EomWebApiProject.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
+
+
 
 
 [Route("api/[controller]")]
@@ -50,18 +51,16 @@ public class SongController : ControllerBase {
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddSongAsync([FromBody] Song song) {
-        if (song == null) {
+    public async Task<IActionResult> AddSongAsync([FromForm] CreateSongDto createSongDto) {
+        if (createSongDto == null) {
             return BadRequest("Song data is null.");
         }
-        
         if (!ModelState.IsValid) {
             return BadRequest(ModelState);
         }
-
         try {
-            await _songService.AddSongAsync(song);
-            return CreatedAtAction(nameof(GetSongByIdAsync), new { id = song.Id }, song);
+            await _songService.AddSongAsync(createSongDto);
+            return Ok("song added");
         }
         catch (Exception ex) {
             return StatusCode(500, $"Internal server error: {ex.Message}");

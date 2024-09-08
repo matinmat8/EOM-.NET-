@@ -1,13 +1,24 @@
-using System.Runtime.CompilerServices;
 using EomWebApiProject.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 public class SongService : ISongService {
     
     private readonly ISongRepository _songRepository;
 
-    public SongService(ISongRepository songRepository) {
+    private readonly IConfiguration _configuration;
+
+    private readonly IGenreRepository _genreRepository;
+
+    private readonly ISingerRepository _singerRepository;
+
+    private readonly IAlbumRepository _albumRepository;
+
+    public SongService(ISongRepository songRepository, IGenreRepository genreRepository,
+     ISingerRepository singerRepository, IAlbumRepository albumRepository, IConfiguration configuration) {
         _songRepository = songRepository;
+        _genreRepository = genreRepository;
+        _singerRepository = singerRepository;
+        _albumRepository = albumRepository;
+        _configuration = configuration;
     }
 
     public async Task<IEnumerable<Song>> GetAllSongsAsync() {
@@ -25,35 +36,48 @@ public class SongService : ISongService {
     }
 
 
-    public async Task AddSongAsync(Song song)
+    public async Task AddSongAsync(CreateSongDto createSongDTO)
     {
-        ArgumentNullException.ThrowIfNull(song);
-
-        var songToAdd = new Song
+        var song = new Song
         {
-            Id = song.Id,
-            UserName = song.UserName,
-            MusicName = song.MusicName,
-            GenreId = song.GenreId,
-            Genre = song.Genre,
-            ReleaseDate = song.ReleaseDate,
-            PublishDate = song.PublishDate,
-            ImagePath = song.ImagePath,
-            ImageFile = song.ImageFile,
-            MusicPath = song.MusicPath,
-            MusicFile = song.MusicFile,
-            Lyrics = song.Lyrics,
-            Review = song.Review,
-            Tag = song.Tag,
-            Views = song.Views,
-            Slug = song.Slug,
-            PlaylistSongs = song.PlaylistSongs,
-            AlbumId = song.AlbumId,
-            Album = song.Album,
-            SongSingers = song.SongSingers,
-            
+            UserName = createSongDTO.UserName,
+            MusicName = createSongDTO.MusicName,
+            GenreId = createSongDTO.GenreId,
+            ReleaseDate = createSongDTO.ReleaseDate,
+            PublishDate = createSongDTO.PublishDate,
+            ImagePath = createSongDTO.ImageFile != null ? SaveFile(createSongDTO.ImageFile) : null,
+            MusicPath = SaveFile(createSongDTO.MusicFile),
+            Lyrics = createSongDTO.Lyrics,
+            Review = createSongDTO.Review,
+            Tag = createSongDTO.Tag,
+            Slug = createSongDTO.Slug,
+            AlbumId = createSongDTO.AlbumId,
         };
-        await _songRepository.AddSongAsync(songToAdd);
+
+        await _songRepository.AddSongAsync(song);
+    }
+
+
+    private string SaveFile(IFormFile file)
+
+    {
+        string directoryPath;
+
+        if (file.ContentType.StartsWith("image/")) {
+            directoryPath = _configuration["FileSettings:ImageFilesPath"];
+        } else {
+            directoryPath = _configuration["FileSettings:SongFilesPath"];
+        }
+
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        var filePath = Path.Combine(directoryPath, file.FileName);
+        using var stream = new FileStream(filePath, FileMode.Create);
+        file.CopyToAsync(stream).Wait();
+        return filePath;
 
     }
 
