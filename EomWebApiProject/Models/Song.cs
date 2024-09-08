@@ -8,9 +8,9 @@ namespace EomWebApiProject.Models {
 
         public string MusicName { get; set; }
         
-        public int? GenreId { get; set; }
+        public int GenreId { get; set; }
 
-        public Genre? Genre { get; set; }
+        public Genre Genre { get; set; }
 
         public DateOnly? ReleaseDate { get; set; }
 
@@ -36,7 +36,7 @@ namespace EomWebApiProject.Models {
 
         public string? Slug { get; set; }
         
-        public ICollection<PlaylistSong> PlaylistSongs { get; set; }
+        public ICollection<PlaylistSong>? PlaylistSongs { get; set; }
 
         public int AlbumId { get; set; }
         public Album Album { get; set; }
