@@ -1,23 +1,15 @@
-<div class="container">
-    <h2>Add New Song</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" id="musicName" [(ngModel)]="song.musicName" name="title" required>
-      </div>
-      <div>
-        <label for="artist">Artist:</label>
-        <input type="text" id="singer" [(ngModel)]="song.singer" name="artist" required>
-      </div>
-      <div>
-        <label for="album">Album:</label>
-        <input type="text" id="album" [(ngModel)]="song.album" name="album">
-      </div>
-      <div>
-        <label for="releaseDate">Release Date:</label>
-        <input type="date" id="releaseDate" [(ngModel)]="song.releaseDate" name="releaseDate">
-      </div>
-      <button type="submit">Add Song</button>
-    </form>
-  </div>
-  
+<form [formGroup]="songForm" (ngSubmit)="onSubmit()">
+  <input formControlName="UserName" placeholder="User Name" />
+  <input formControlName="MusicName" placeholder="Music Name" />
+  <input formControlName="GenreId" placeholder="Genre ID" />
+  <input formControlName="ReleaseDate" type="date" />
+  <input formControlName="PublishDate" type="date" />
+  <input type="file" (change)="onFileChange($event, 'ImageFile')" />
+  <input type="file" (change)="onFileChange($event, 'MusicFile')" />
+  <textarea formControlName="Lyrics" placeholder="Lyrics"></textarea>
+  <textarea formControlName="Review" placeholder="Review"></textarea>
+  <input formControlName="Tag" placeholder="Tag" />
+  <input formControlName="Slug" placeholder="Slug" />
+  <input formControlName="AlbumId" placeholder="Album ID" />
+  <button type="submit">Create Song</button>
+</form>

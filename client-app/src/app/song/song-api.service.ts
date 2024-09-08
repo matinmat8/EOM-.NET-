@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Song } from '../models/song.model';
+import { CreateSongDto } from '../dtos/CreateSongDto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,39 +15,27 @@ export class SongApiService {
 
 
   getData(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-      });
     
-    return this.http.get(`${this.apiUrl}`, {headers})
+    return this.http.get(`${this.apiUrl}`)
 
   }
 
   getDetail(id: number): Observable<Song> {
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-      });
-
-    return this.http.get<Song>(`${this.apiUrl}/${id}`, {headers})
+    return this.http.get<Song>(`${this.apiUrl}/${id}`)
   }
 
-  createSong(song: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-      });
-      
-    return this.http.post<any>(`${this.apiUrl}`, song, {headers})
+  createSong(songData: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl, songData);
   }
+
+
+  addSongWithSingers(createSongDto: CreateSongDto): Observable<CreateSongDto> {
+    return this.http.post<CreateSongDto>(this.apiUrl, createSongDto);
+
+}
 
   deleteSong(songId: number): Observable<Song> {
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-      });
     
-    return this.http.delete<Song>(`${this.apiUrl}/${songId}`, {headers})
+    return this.http.delete<Song>(`${this.apiUrl}/${songId}`)
   }
 }
