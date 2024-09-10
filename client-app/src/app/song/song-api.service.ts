@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Song } from '../models/song.model';
 import { CreateSongDto } from '../dtos/CreateSongDto.model';
+import { UpdateSongDto } from '../dtos/UpdateSongDto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class SongApiService {
 
   }
 
-  getDetail(id: number): Observable<Song> {
-    return this.http.get<Song>(`${this.apiUrl}/${id}`)
+  getDetail(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`)
   }
 
   createSong(songData: FormData): Observable<any> {
@@ -37,5 +38,10 @@ export class SongApiService {
   deleteSong(songId: number): Observable<Song> {
     
     return this.http.delete<Song>(`${this.apiUrl}/${songId}`)
+  }
+
+  updateSong(updateSongDto: UpdateSongDto): Observable<UpdateSongDto> {
+    
+    return this.http.put<UpdateSongDto>(`${this.apiUrl}`, updateSongDto)
   }
 }
