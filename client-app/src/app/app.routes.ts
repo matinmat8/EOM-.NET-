@@ -11,6 +11,8 @@ import { SingerDeleteComponent } from './singer/singer-delete/singer-delete.comp
 import { SingerUpdateComponent } from './singer/singer-update/singer-update.component';
 import { GenreCreateComponent } from './genre/genre-create/genre-create.component';
 import { SongUpdateComponent } from './song/song-update/song-update.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 
 
 export const routes: Routes = [
@@ -25,5 +27,7 @@ export const routes: Routes = [
     { path: 'singer/list', component:SingerReadComponent },
     { path: 'singer/:id', component: SingerDetailComponent },
     { path: 'singer/delete/:id', component:SingerDeleteComponent },
-    { path: 'singer/update/:id', component:SingerUpdateComponent }
+    { path: 'singer/update/:id', component:SingerUpdateComponent },
+    {path: 'login', component:LoginComponent},
+    {path: 'signup', component:SignUpComponent}
 ];
