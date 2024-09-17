@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using EomWebApiProject.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 
 namespace EomWebApiProject.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                 : base(options)
@@ -19,9 +22,12 @@ namespace EomWebApiProject.Data
         public DbSet<PlaylistSong> PlaylistSongs { get; set; }
         public DbSet<AlbumSong> AlbumSongs { get; set; }
         public DbSet<SongSinger> SongSingers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             // Song entity configuration
             modelBuilder.Entity<Song>(entity =>
             {
