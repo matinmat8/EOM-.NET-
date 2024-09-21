@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthServiceClient } from './proto/auth_pb_service';
 import { Observable } from 'rxjs';
 import { LoginRequest, SignUpRequest } from './proto/auth_pb';
-import { BrowserHeaders } from 'browser-headers';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ import { BrowserHeaders } from 'browser-headers';
 export class AuthService {
   private client: AuthServiceClient;
 
-  constructor() {
+  constructor(private router: Router) {
     this.client = new AuthServiceClient('http://127.0.0.1:5002');
   }
 
@@ -55,5 +55,15 @@ export class AuthService {
         }
       })
     })
+  }
+
+  logOut() {
+    try{
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    }catch(e) {
+      console.log(e);
+    }
+
   }
 }
