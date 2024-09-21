@@ -3,6 +3,7 @@ import { AuthServiceClient } from './proto/auth_pb_service';
 import { Observable } from 'rxjs';
 import { LoginRequest, SignUpRequest } from './proto/auth_pb';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode'
 
 
 @Injectable({
@@ -65,5 +66,19 @@ export class AuthService {
       console.log(e);
     }
 
+  }
+
+  getUsername(): string | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.sub;
+    }
+    return null;
+  }
+
+  isAuthenticated() {
+      const token = localStorage.getItem('token');
+      return token;
   }
 }
