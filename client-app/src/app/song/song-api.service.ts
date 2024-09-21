@@ -5,12 +5,15 @@ import { Song } from '../models/song.model';
 import { CreateSongDto } from '../dtos/CreateSongDto.model';
 import { UpdateSongDto } from '../dtos/UpdateSongDto.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SongApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   private apiUrl = 'http://localhost:5002/api/Song';
 
@@ -21,9 +24,15 @@ export class SongApiService {
 
   }
 
-  getDetail(id: number): Observable<any> {
+  getDetail(id: number): Observable<Song> {
     return this.http.get<any>(`${this.apiUrl}/${id}`)
   }
+
+
+  fetchSongFile(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/download/${id}`, { responseType: 'blob'});
+  }  
+
 
   createSong(songData: FormData): Observable<any> {
     return this.http.post<any>(this.apiUrl, songData);

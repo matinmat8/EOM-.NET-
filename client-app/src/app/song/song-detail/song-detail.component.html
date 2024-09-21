@@ -1,11 +1,25 @@
-<div *ngIf="song">
-    <h2>{{ song.MusicName }}</h2>
-    <p>Artist: {{ song.Genre }}</p>
-    <p>Album: {{ song.Album }}</p>
-    <p>Release Date: {{ song.ReleaseDate }}</p>
+<div *ngIf="song" class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{ song.MusicName }}</h2>
+      <p class="card-text"><strong>Artist:</strong> {{ song.Genre }}</p>
+      <p class="card-text"><strong>Album:</strong> {{ song.Album }}</p>
+      <p class="card-text"><strong>Release Date:</strong> {{ song.ReleaseDate }}</p>
 
+      <audio *ngIf="songFileUrl" controls class="w-100 mt-3">
+        <source [src]="songFileUrl" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      
 
-    <a [routerLink]="['/song/delete', song.id]">{{ song.musicName }} by {{ song.songSingers }}</a>
-
+      <div class="mt-3">
+        <a [routerLink]="['/song/delete', song.id]" class="btn btn-danger me-2">
+          <i class="fas fa-trash-alt"></i> Delete
+        </a>
+        <a [routerLink]="['/song/update', song.id]" class="btn btn-primary">
+          <i class="fas fa-edit"></i> Update
+        </a>
+      </div>
+    </div>
   </div>
-  
+</div>
