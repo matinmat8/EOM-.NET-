@@ -26,10 +26,9 @@ public class SongService : ISongService {
     }
 
     public async Task<Song> GetSongByIdAsync (int id) {
-        var song = await _songRepository.GetSongByIdAsync(id) ?? throw new KeyNotFoundException("Song not found");
-        return song;
+        return await _songRepository.GetSongByIdAsync(id) ?? throw new KeyNotFoundException("Song not found");
     }
-
+    
     public async Task<IEnumerable<Song>> GetSongByGenreAsync(int GenreId) {
         var song = await _songRepository.GetSongByGenreAsync(GenreId) ?? throw new KeyNotFoundException("Song not found");
         return song;
@@ -81,13 +80,13 @@ public class SongService : ISongService {
 
     }
 
-    public async Task<bool> UpdateSongAsync(Song song){
-        var existingSong = await _songRepository.GetSongByIdAsync(song.Id);
+    public async Task<bool> UpdateSongAsync(UpdateSongDto updateSongDto){
+        var existingSong = await _songRepository.GetSongByIdAsync(updateSongDto.Id);
         ArgumentNullException.ThrowIfNull(existingSong);
 
-        existingSong.MusicName = song.MusicName;
-        existingSong.SongSingers = song.SongSingers;
-        existingSong.AlbumId = song.AlbumId;
+        existingSong.MusicName = updateSongDto.MusicName;
+        existingSong.GenreId = updateSongDto.GenreId;
+        existingSong.AlbumId = updateSongDto.AlbumId;
 
         return await _songRepository.UpdateSongAsync(existingSong);
     }

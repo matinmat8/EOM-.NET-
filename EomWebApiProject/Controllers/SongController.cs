@@ -22,18 +22,25 @@ public class SongController : ControllerBase {
     }
 
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Song>> GetSongByIdAsync(int id) {
-        try {
-            var song = await _songService.GetSongByIdAsync(id);
-            return Ok(song);
-        }
-        catch (KeyNotFoundException) {
+[HttpGet("{id}")]
+public async Task<IActionResult> GetSongByIdAsync(int id) {
+    var song = await _songService.GetSongByIdAsync(id);
+
+    if (song == null) {
+        return NotFound();
+    }
+    return Ok(song);
+    }
+
+
+    [HttpGet("download/{songId}")]
+    public async Task<IActionResult> GetSongFile(int songId) {
+        var song = await _songService.GetSongByIdAsync(songId);
+        if (!System.IO.File.Exists(song.MusicPath)) {
             return NotFound();
-        }
-        catch (Exception ex) {
-            return StatusCode(500, $"Internal server error: {ex.Message}");
-        }
+            }
+        var fileBytes = await System.IO.File.ReadAllBytesAsync(song.MusicPath);
+            return File(fileBytes, "audio/mpeg");
     }
 
     [HttpGet(("genre/{GenreId}"))]
@@ -67,20 +74,17 @@ public class SongController : ControllerBase {
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateSongAsync(int id ,[FromBody] Song song) {
-        if (song == null) {
+    [HttpPut]
+    public async Task<IActionResult> UpdateSongAsync([FromBody] UpdateSongDto updateSongDto) {
+        if (updateSongDto == null) {
             return BadRequest("song data is null");
         }
         if (!ModelState.IsValid) {
             return BadRequest(ModelState);
         }
-        if (id != song.Id) {
-            return BadRequest("Song ID Mismatch");
-        }
         try {
-            await _songService.UpdateSongAsync(song);
-            return NoContent();
+            await _songService.UpdateSongAsync(updateSongDto);
+            return Ok("It's updated");
         }
         catch (KeyNotFoundException) {
             return NotFound("Song not found");

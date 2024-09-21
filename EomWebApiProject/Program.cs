@@ -6,11 +6,15 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<FormOptions>(options => {
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
+});
 
 builder.Services.AddLogging(logging =>
 {
@@ -93,6 +97,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowSpecificOrigin");
+
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -101,7 +108,6 @@ app.UseAuthorization();
 
 app.UseGrpcWeb();
 
-app.UseCors("AllowSpecificOrigin");
 
 app.UseEndpoints(endpoints =>
     {
