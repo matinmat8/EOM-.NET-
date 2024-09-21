@@ -13,6 +13,7 @@ import { GenreCreateComponent } from './genre/genre-create/genre-create.componen
 import { SongUpdateComponent } from './song/song-update/song-update.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
+import { AuthGuard } from './auth.guard';
 
 
 export const routes: Routes = [
@@ -20,14 +21,14 @@ export const routes: Routes = [
     { path: 'genre', component: GenreCreateComponent },
     { path: 'album', component: AddAlbumComponent},
     { path: 'song/:id', component: SongDetailComponent },
-    { path: 'song/add', component: SongCreateComponent },
+    { path: 'song/add', component: SongCreateComponent, canActivate: [AuthGuard] },
     { path: 'song/update/:id', component: SongUpdateComponent },
     { path: 'song/delete/:id', component: SongDeleteComponent },
-    { path: 'singer/add', component:AddSingerComponent},
+    { path: 'singer/add', component:AddSingerComponent, canActivate: [AuthGuard]},
     { path: 'singer/list', component:SingerReadComponent },
     { path: 'singer/:id', component: SingerDetailComponent },
-    { path: 'singer/delete/:id', component:SingerDeleteComponent },
-    { path: 'singer/update/:id', component:SingerUpdateComponent },
+    { path: 'singer/delete/:id', component:SingerDeleteComponent, canActivate: [AuthGuard] },
+    { path: 'singer/update/:id', component:SingerUpdateComponent, canActivate: [AuthGuard] },
     {path: 'login', component:LoginComponent},
     {path: 'signup', component:SignUpComponent}
 ];
