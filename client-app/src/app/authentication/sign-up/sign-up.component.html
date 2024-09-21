@@ -1,15 +1,21 @@
-<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-    <label for="Username">Username:</label>
-    <input id="Username" formControlName="Username">
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="Username" class="form-label">Username:</label>
+    <input id="Username" formControlName="Username" class="form-control">
+  </div>
 
-    <label for="Password">Password:</label>
-    <input id="Password" formControlName="Password" type="password">
+  <div class="mb-3"> 
+    <label for="Password" class="form-label">Password:</label>
+    <input id="Password" class="form-control" formControlName="Password" type="password">
+  </div>
 
-    <label for="Email">Email:</label>
-    <input id="Email" formControlName="Email" type="email">
+  <div class="mb-3">
+    <label for="Email" class="form-label">Email:</label>
+    <input id="Email" formControlName="Email" type="email" class="form-control">
+  </div>
     
 
     
-    <button type="submit">Sign up</button>
-  </form>
+  <button type="submit" class="btn" style="background-color: rgb(29, 28, 35); color: rgb(255, 178, 34); margin-top: 15px;" [disabled]="signUpForm.invalid">Sign Up</button>
+</form>
   

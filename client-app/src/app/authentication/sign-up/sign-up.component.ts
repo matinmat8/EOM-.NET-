@@ -26,7 +26,7 @@ export class SignUpComponent {
     if (this.signUpForm.valid) {
       console.log(this.signUpForm.value);
       this.authService.signUp(this.signUpForm.value).subscribe(response => {
-        localStorage.setItem('token', response[0]);
+        localStorage.setItem('token', response.u[0]);
       })
     }
   }

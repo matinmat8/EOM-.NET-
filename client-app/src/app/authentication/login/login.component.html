@@ -1,10 +1,12 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label for="usernmae">username:</label>
-    <input id="username" formControlName="username" type="text">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="usernmae" class="form-label">username:</label>
+    <input id="username" formControlName="username" class="form-control" type="text">
+  </div>
+  <div>  
+    <label for="password" class="form-label">Password:</label>
+    <input id="password" formControlName="password" class="form-control" type="password">
     
-    <label for="password">Password:</label>
-    <input id="password" formControlName="password" type="password">
-    
-    <button type="submit">Login</button>
+    <button type="submit" class="btn" style="background-color: rgb(29, 28, 35); color: rgb(255, 178, 34); margin-top: 15px;" [disabled]="loginForm.invalid">Login</button>
+  </div>
   </form>
-  

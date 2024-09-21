@@ -1,15 +1,63 @@
-<form [formGroup]="songForm" (ngSubmit)="onSubmit()">
-  <input formControlName="UserName" placeholder="User Name" />
-  <input formControlName="MusicName" placeholder="Music Name" />
-  <input formControlName="GenreId" placeholder="Genre ID" />
-  <input formControlName="ReleaseDate" type="date" />
-  <input formControlName="PublishDate" type="date" />
-  <input type="file" (change)="onFileChange($event, 'ImageFile')" />
-  <input type="file" (change)="onFileChange($event, 'MusicFile')" />
-  <textarea formControlName="Lyrics" placeholder="Lyrics"></textarea>
-  <textarea formControlName="Review" placeholder="Review"></textarea>
-  <input formControlName="Tag" placeholder="Tag" />
-  <input formControlName="Slug" placeholder="Slug" />
-  <input formControlName="AlbumId" placeholder="Album ID" />
-  <button type="submit">Create Song</button>
+<form [formGroup]="songForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="userName" class="form-label">User Name:</label>
+    <input id="userName" formControlName="UserName" class="form-control" placeholder="User Name" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="musicName" class="form-label">Music Name:</label>
+    <input id="musicName" formControlName="MusicName" class="form-control" placeholder="Music Name" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="genreId" class="form-label">Genre ID:</label>
+    <input id="genreId" formControlName="GenreId" class="form-control" placeholder="Genre ID" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="releaseDate" class="form-label">Release Date:</label>
+    <input id="releaseDate" formControlName="ReleaseDate" type="date" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="publishDate" class="form-label">Publish Date:</label>
+    <input id="publishDate" formControlName="PublishDate" type="date" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="imageFile" class="form-label">Image File:</label>
+    <input id="imageFile" type="file" (change)="onFileChange($event, 'ImageFile')" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="musicFile" class="form-label">Music File:</label>
+    <input id="musicFile" type="file" (change)="onFileChange($event, 'MusicFile')" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="lyrics" class="form-label">Lyrics:</label>
+    <textarea id="lyrics" formControlName="Lyrics" class="form-control" placeholder="Lyrics"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="review" class="form-label">Review:</label>
+    <textarea id="review" formControlName="Review" class="form-control" placeholder="Review"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="tag" class="form-label">Tag:</label>
+    <input id="tag" formControlName="Tag" class="form-control" placeholder="Tag">
+  </div>
+
+  <div class="mb-3">
+    <label for="slug" class="form-label">Slug:</label>
+    <input id="slug" formControlName="Slug" class="form-control" placeholder="Slug">
+  </div>
+
+  <div class="mb-3">
+    <label for="albumId" class="form-label">Album ID:</label>
+    <input id="albumId" formControlName="AlbumId" class="form-control" placeholder="Album ID">
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="songForm.invalid">Create Song</button>
 </form>

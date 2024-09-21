@@ -1,44 +1,42 @@
-<form [formGroup]="singerForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Name:</label>
-      <input id="name" formControlName="Name" required>
-      <div *ngIf="singerForm.get('Name')?.invalid && (singerForm.get('Name')?.dirty || singerForm.get('Name')?.touched)">
-        <small class="error">Name is required.</small>
-      </div>
+<form [formGroup]="singerForm" (ngSubmit)="onSubmit()" class="container mt-4">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name:</label>
+    <input id="name" formControlName="Name" class="form-control" required>
+    <div *ngIf="singerForm.get('Name')?.invalid && (singerForm.get('Name')?.dirty || singerForm.get('Name')?.touched)">
+      <small class="text-danger">Name is required.</small>
     </div>
-  
-    <div>
-      <label for="genreId">Genre ID:</label>
-      <input id="genreId" formControlName="GenreId" required>
-      <div *ngIf="singerForm.get('GenreId')?.invalid && (singerForm.get('GenreId')?.dirty || singerForm.get('GenreId')?.touched)">
-        <small class="error">Genre ID is required.</small>
-      </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="genreId" class="form-label">Genre ID:</label>
+    <input id="genreId" formControlName="GenreId" class="form-control" required>
+    <div *ngIf="singerForm.get('GenreId')?.invalid && (singerForm.get('GenreId')?.dirty || singerForm.get('GenreId')?.touched)">
+      <small class="text-danger">Genre ID is required.</small>
     </div>
-  
-    <div>
-      <label for="albumId">Album ID:</label>
-      <input id="albumId" formControlName="AlbumId" required>
-      <div *ngIf="singerForm.get('AlbumId')?.invalid && (singerForm.get('AlbumId')?.dirty || singerForm.get('AlbumId')?.touched)">
-        <small class="error">Album ID is required.</small>
-      </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="albumId" class="form-label">Album ID:</label>
+    <input id="albumId" formControlName="AlbumId" class="form-control" required>
+    <div *ngIf="singerForm.get('AlbumId')?.invalid && (singerForm.get('AlbumId')?.dirty || singerForm.get('AlbumId')?.touched)">
+      <small class="text-danger">Album ID is required.</small>
     </div>
-  
-  
-    <div>
-      <label for="birth">Birth Date:</label>
-      <input id="birth" type="date" formControlName="Birth">
-    </div>
-  
-    <div>
-      <label for="death">Death Date:</label>
-      <input id="death" type="date" formControlName="Death">
-    </div>
-  
-    <div>
-      <label for="aboutSinger">About Singer:</label>
-      <textarea id="aboutSinger" formControlName="AboutSinger"></textarea>
-    </div>
-  
-    <button type="submit" [disabled]="singerForm.invalid">Add Singer</button>
-  </form>
-  
+  </div>
+
+  <div class="mb-3">
+    <label for="birth" class="form-label">Birth Date:</label>
+    <input id="birth" type="date" formControlName="Birth" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="death" class="form-label">Death Date:</label>
+    <input id="death" type="date" formControlName="Death" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label for="aboutSinger" class="form-label">About Singer:</label>
+    <textarea id="aboutSinger" formControlName="AboutSinger" class="form-control"></textarea>
+  </div>
+
+  <button type="submit" class="btn" style="background-color: rgb(29, 28, 35); color: rgb(255, 178, 34);" [disabled]="singerForm.invalid">Add Singer</button>
+</form>

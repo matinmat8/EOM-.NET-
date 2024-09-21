@@ -4,7 +4,6 @@ import { SingerApiService } from '../singer-api.service';
 import { CreateSingerDto } from '../../dtos/CreateSingerDto.modl';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { resolve } from 'path';
 
 @Component({
   selector: 'app-singer-create',
